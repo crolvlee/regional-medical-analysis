@@ -9,7 +9,7 @@ import pandas as pd
 import time
 
 # 결과 저장 디렉토리 설정
-result_dir = os.path.join(os.getcwd(), "result")
+result_dir = os.path.join(os.getcwd(), "../result")
 if not os.path.exists(result_dir):
     os.makedirs(result_dir)
 
