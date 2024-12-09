@@ -9,9 +9,9 @@ import pandas as pd
 import time
 
 # 결과 저장 디렉토리 설정
-result_dir = os.path.join(os.getcwd(), "../result")
-if not os.path.exists(result_dir):
-    os.makedirs(result_dir)
+data_raw_dir = os.path.join(os.getcwd(), "../data_raw")
+if not os.path.exists(data_raw_dir):
+    os.makedirs(data_raw_dir)
 
 # 웹 드라이버 설정
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -78,7 +78,7 @@ for department_name, base_index in departments.items():
                     time.sleep(1)
 
                     # 4. 체크박스 선택
-                    index = base_index - 1 if category_name == "의원" else base_index
+                    index = base_index + 1 if category_name == "의원" else base_index
                     checkbox_xpath = f'//*[@id="dtlCdList"]/li[{index}]/label'
                     checkbox = driver.find_element(By.XPATH, checkbox_xpath)
                     
@@ -148,7 +148,7 @@ for department_name, base_index in departments.items():
     df = pd.DataFrame(department_data, columns=columns)
 
     # 파일 저장 경로 설정
-    file_path = os.path.join(result_dir, f"hospital_data_{department_name}.xlsx")
+    file_path = os.path.join(data_raw_dir, f"hospital_data_{department_name}.xlsx")
 
     # 엑셀 파일 저장
     try:
