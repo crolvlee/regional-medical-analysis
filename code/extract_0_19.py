@@ -7,7 +7,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))  # 현재 코드가 위치
 input_file = os.path.join(base_dir, "../data_raw/population_sggu.xlsx")
 output_file = os.path.join(base_dir, "../data_clean/population_0_19.xlsx")
 
-# 데이터 읽기 (Excel 파일 읽기로 변경)
+# 데이터 읽기
 data = pd.read_excel(input_file)  # Excel 파일 읽기
 
 # 열 이름 확인 및 선택
