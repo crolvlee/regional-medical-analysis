@@ -119,7 +119,7 @@ for department_name, base_index in departments.items():
                             # 다음 페이지 XPath 결정
                             if int(current_page) % 10 == 0:  # 10, 20, 30 페이지 등
                                 # 10의 배수일 경우
-                                next_button_xpath = f'//*[@id="pagingPc"]/a[{int(current_page) // 10 + 1}]'  # 10=2, 20=3
+                                next_button_selector = '#pagingPc > a.next'
                             else:
                                 # 10의 배수가 아닌 경우
                                 next_page_relative_index = int(current_page) % 10 + 1
@@ -127,7 +127,10 @@ for department_name, base_index in departments.items():
 
                             # 다음 페이지 클릭
                             try:
-                                next_page_button = driver.find_element(By.XPATH, next_button_xpath)
+                                if int(current_page) % 10 == 0:
+                                    next_page_button = driver.find_element(By.CSS_SELECTOR, next_button_selector)
+                                else:
+                                    next_page_button = driver.find_element(By.XPATH, next_button_xpath)
                                 next_page_button.click()
                                 time.sleep(2)
                             except Exception as e:
