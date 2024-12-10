@@ -8,7 +8,7 @@ input_folder = os.path.join(base_dir, "../data_raw")
 output_folder = os.path.join(base_dir, "../data_clean")
 
 # 처리할 파일 이름 리스트
-departments = ["내과", "소아청소년과", "산부인과"]
+departments = ["내과", "소아청소년과", "산부인과", "신경과"]
 
 # 출력 폴더 생성 (없을 경우)
 os.makedirs(output_folder, exist_ok=True)
