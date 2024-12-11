@@ -14,7 +14,7 @@ data = pd.read_excel(input_file)  # Excel 파일 읽기
 data_cleaned = data.iloc[:, [0, 1, 3, 11, 12, 13, 14, 15]].copy()
 
 # 열 이름 변경
-data_cleaned.columns = ["행정기관(대)", "행정기관(소)", "총 인구수", "60~69세", "70~79세", "80~89세", "90~99세", "100세 이상"]
+data_cleaned.columns = ["행정구역(대)", "행정구역(소)", "총 인구수", "60~69세", "70~79세", "80~89세", "90~99세", "100세 이상"]
 
 def convert_to_int(column):
     try:
@@ -40,8 +40,11 @@ data_cleaned["60세 이상"] = (
     data_cleaned["100세 이상"]
 )
 
+# 행정구역 데이터 추가
+data_cleaned["행정구역"] = data_cleaned["행정구역(대)"] + " " + data_cleaned["행정구역(소)"]
+
 # 필요한 열만 선택하여 새 데이터프레임 생성
-result = data_cleaned[["행정기관(대)", "행정기관(소)", "총 인구수", "60~69세", "70~79세", "80~89세", "90~99세", "100세 이상", "60세 이상"]]
+result = data_cleaned[["행정구역", "행정구역(대)", "행정구역(소)", "총 인구수", "60~69세", "70~79세", "80~89세", "90~99세", "100세 이상", "60세 이상"]]
 
 # 결과 저장
 result.to_excel(output_file, index=False)

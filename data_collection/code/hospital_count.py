@@ -21,13 +21,13 @@ for dept in departments:
     # 데이터 읽기
     hospital_data = pd.read_excel(input_file)
     
-    # "행정구역(대)"와 "행정구역(소)" 합치기
+    # "행정구역" 열 생성
     hospital_data["행정구역"] = hospital_data["행정기관(대)"] + " " + hospital_data["행정기관(소)"]
-    
+
     # 행정구역별 병원 수 계산
-    hospital_counts = hospital_data["행정구역"].value_counts().reset_index()
-    hospital_counts.columns = ["행정구역", "병원 수"]
-    
+    hospital_counts = hospital_data.groupby(["행정구역", "행정기관(대)", "행정기관(소)"]).size().reset_index(name="병원 수")
+
     # 결과 저장
     hospital_counts.to_excel(output_file, index=False)
     print(f"{dept} 병원 수 데이터가 생성되었습니다: {output_file}")
+
